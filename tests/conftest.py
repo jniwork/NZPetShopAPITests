@@ -15,3 +15,19 @@ def create_pet():
     response = requests.post(url=f"{BASE_URL}/pet", json=payload)
     assert response.status_code == 200
     return response.json()
+
+
+@pytest.fixture(scope="function")
+def create_order():
+    """Фикстура для создания заказа"""
+    payload = {
+        "id": 10,
+        "name": "doggie",
+        "category": {"id": 1, "name": "Dogs"},
+        "photoUrls": ["string"],
+        "tags": [{"id": 0, "name": "string"}],
+        "status": "available"
+    }
+    response = requests.post(url=f"{BASE_URL}/store/order", json=payload)
+    assert response.status_code == 200
+    return response.json()
